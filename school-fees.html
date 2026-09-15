@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Fees - Beth Barah Academy</title>
+  <meta name="description" content="View Beth Barah Academy's school fees by grade level, including tuition and additional costs such as uniform, textbooks, and PTA dues.">
+  <meta property="og:title" content="School Fees - Beth Barah Academy">
+  <meta property="og:description" content="Fee breakdown by grade level for Beth Barah Academy.">
+  <meta property="og:image" content="images/logo.png">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <style>
+    html { overflow-x: hidden; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Helvetica, Arial, sans-serif; color: #1a1a1a; line-height: 1.6;
+      background-color: #ffffff;
+      background-image: url('images/pattern.jpg');
+      background-repeat: repeat;
+      overflow-x: hidden;
+      opacity: 0;
+      animation: pageFadeIn 0.5s ease forwards;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    @keyframes pageFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    body.page-leaving { animation: pageFadeOut 0.35s ease forwards; }
+    @keyframes pageFadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+    header {
+      background-color: #ffffff;
+      background-image: linear-gradient(rgba(255,255,255,0.75), rgba(255,255,255,0.75)), url('images/pattern.jpg');
+      background-blend-mode: lighten;
+      background-repeat: repeat;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 60px; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 20;
+      transition: padding 0.3s ease, box-shadow 0.3s ease;
+    }
+    header.scrolled { padding: 10px 60px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    header.scrolled img { height: 56px !important; }
+    header img { transition: height 0.3s ease; }
+    header h1 { font-size: 22px; color: #1e5f8c; letter-spacing: 0.5px; text-transform: uppercase; }
+    header .brand-slogan { display: block; font-size: 11px; color: #999; letter-spacing: 1px; text-transform: uppercase; }
+    .nav a { color: #333; text-decoration: none; margin-left: 30px; font-size: 15px; font-weight: 500; transition: color 0.2s; position: relative; }
+    .nav > a::after { content: ''; position: absolute; left: 0; bottom: -4px; width: 0; height: 2px; background-color: #ffcc00; transition: width 0.25s ease; }
+    .nav > a:hover::after { width: 100%; }
+    .nav-item { position: relative; display: inline-block; }
+    .dropdown {
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      position: absolute; top: 100%; left: 30px; padding-top: 10px; z-index: 30;
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+    }
+    .dropdown-inner {
+      background: white; box-shadow: 0 16px 40px rgba(20,64,110,0.18); border-radius: 14px; padding: 10px; min-width: 250px;
+      position: relative; overflow: hidden;
+    }
+    .dropdown-inner::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, #14406e, #ffcc00);
+    }
+    .nav-item:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+    .dropdown a {
+      display: flex; align-items: center; gap: 12px; margin-left: 0; padding: 11px 14px; font-size: 14px; color: #333;
+      white-space: nowrap; border-radius: 9px; opacity: 0; transform: translateX(-8px);
+      transition: background-color 0.2s, color 0.2s, transform 0.2s, opacity 0.2s;
+    }
+    .dropdown a .dd-icon {
+      display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; flex-shrink: 0;
+      border-radius: 50%; background-color: #fdf6e3; color: #14406e; transition: background-color 0.2s, color 0.2s;
+    }
+    .dropdown a .dd-icon svg { width: 15px; height: 15px; }
+    .nav-item:hover .dropdown a { opacity: 1; transform: translateX(0); }
+    .nav-item:hover .dropdown a:nth-child(1) { transition-delay: 0.04s; }
+    .nav-item:hover .dropdown a:nth-child(2) { transition-delay: 0.08s; }
+    .nav-item:hover .dropdown a:nth-child(3) { transition-delay: 0.12s; }
+    .nav-item:hover .dropdown a:nth-child(4) { transition-delay: 0.16s; }
+    .nav-item:hover .dropdown a:nth-child(5) { transition-delay: 0.2s; }
+    .dropdown a::after { display: none; }
+    .dropdown a:hover { background-color: #fdf6e3; color: #14406e; transform: translateX(3px); }
+    .dropdown a:hover .dd-icon { background-color: #14406e; color: #ffcc00; }
+
+    .hamburger {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      width: 34px; height: 34px; background: none; border: none; cursor: pointer; padding: 0;
+    }
+    .hamburger span { display: block; width: 100%; height: 3px; background-color: #14406e; border-radius: 2px; transition: transform 0.25s ease, opacity 0.25s ease; }
+    .hamburger.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    .page-hero {
+      text-align: center; padding: 80px 20px 60px;
+      background-color: #1e5f8c;
+      background-image: linear-gradient(135deg, #1e5f8c 0%, #14406e 100%), url('images/pattern.jpg');
+      background-blend-mode: multiply;
+      background-repeat: repeat;
+      color: white;
+    }
+    .page-hero h2 { font-size: 42px; font-weight: 700; margin-bottom: 15px; animation: heroFadeUp 0.7s ease both; }
+    .page-hero p { font-size: 17px; color: #e8f1fa; max-width: 600px; margin: 0 auto; animation: heroFadeUp 0.7s ease 0.15s both; }
+    @keyframes heroFadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fees-wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 40px;
+      flex: 1;
+    }
+    .fees-intro {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 60px;
+      color: #555;
+      font-size: 16px;
+    }
+    .fee-accordion {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 80px;
+    }
+    .accordion-item {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 8px 26px rgba(0,0,0,0.07);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+    }
+    .accordion-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .accordion-item:hover {
+      box-shadow: 0 14px 34px rgba(0,0,0,0.12);
+    }
+    .accordion-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 26px 30px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #1e5f8c, #14406e);
+      color: white;
+      user-select: none;
+    }
+    .accordion-header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .accordion-header .cat-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background-color: rgba(255,255,255,0.15);
+      color: #ffcc00;
+    }
+    .accordion-header .cat-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+    .accordion-header h3 {
+      font-size: 19px;
+      margin-bottom: 3px;
+    }
+    .accordion-header span {
+      font-size: 13px;
+      color: #cfe0ee;
+    }
+    .accordion-chevron {
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    .accordion-chevron svg {
+      width: 20px;
+      height: 20px;
+      color: #ffcc00;
+    }
+    .accordion-item.open .accordion-chevron {
+      transform: rotate(180deg);
+    }
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .accordion-item.open .accordion-body {
+      max-height: 600px;
+    }
+    .accordion-body-inner {
+      padding: 10px 30px 26px;
+    }
+    .class-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .class-row:last-child {
+      border-bottom: none;
+    }
+    .class-row .class-name {
+      font-size: 15px;
+      color: #333;
+      font-weight: 600;
+    }
+    .class-row .class-amount {
+      font-size: 15px;
+      font-weight: 700;
+      color: #14406e;
+      background-color: #fdf6e3;
+      padding: 5px 14px;
+      border-radius: 20px;
+    }
+
+    .extra-costs {
+      background: white;
+      border-radius: 14px;
+      box-shadow: 0 8px 26px rgba(0,0,0,0.07);
+      padding: 40px 40px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .extra-costs.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .extra-costs h3 {
+      color: #14406e;
+      font-size: 24px;
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    .extra-costs > p {
+      text-align: center;
+      color: #777;
+      font-size: 14px;
+      margin-bottom: 30px;
+    }
+    .extra-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .extra-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background-color: #fdf6e3;
+      border-radius: 10px;
+      padding: 16px 18px;
+    }
+    .extra-item .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background-color: #14406e;
+      color: #ffcc00;
+    }
+    .extra-item .icon svg {
+      width: 18px;
+      height: 18px;
+    }
+    .extra-item div h4 {
+      font-size: 14px;
+      color: #14406e;
+      margin-bottom: 2px;
+    }
+    .extra-item div span {
+      font-size: 13px;
+      color: #777;
+    }
+
+    .fee-note {
+      text-align: center;
+      max-width: 650px;
+      margin: 50px auto 0;
+      color: #777;
+      font-size: 13px;
+      font-style: italic;
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 20px 40px 100px;
+    }
+    .cta-section p {
+      color: #555;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+    .cta-btn {
+      display: inline-block;
+      background-color: #ffcc00;
+      color: #14406e;
+      border: none;
+      padding: 15px 34px;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+    }
+
+    footer {
+      background-color: #1e5f8c;
+      background-image: linear-gradient(#1e5f8c, #1e5f8c), url('images/pattern.jpg');
+      background-blend-mode: multiply;
+      background-repeat: repeat;
+      color: #e8f1fa;
+      padding: 60px 40px 20px;
+      margin-top: auto;
+    }
+    .footer-content { display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; margin-bottom: 30px; }
+    .footer-col h4 { color: #ffcc00; margin-bottom: 15px; font-size: 16px; }
+    .footer-col p { font-size: 14px; color: #cdd6e0; margin-bottom: 6px; }
+    .footer-bottom { text-align: center; font-size: 13px; color: #9fb8ce; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px; }
+
+    @media (max-width: 900px) {
+      .hamburger { display: flex; }
+      header { flex-wrap: wrap; }
+      .nav {
+        display: none; flex-direction: column; align-items: flex-start; width: 100%;
+        background-color: #ffffff; padding: 10px 0 20px; gap: 4px;
+        position: absolute; top: 100%; left: 0; box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+      }
+      .nav.open { display: flex; }
+      .nav a { width: 100%; margin-left: 0; padding: 12px 24px; }
+      .nav > a::after { display: none; }
+      .nav-item { width: 100%; }
+      .dropdown { position: static; opacity: 1; visibility: visible; transform: none; display: none; box-shadow: none; padding-top: 0; }
+      .dropdown.open { display: block; }
+      .dropdown.open a { opacity: 1; transform: none; transition-delay: 0s !important; }
+      .dropdown-inner { box-shadow: none; border-radius: 0; background-color: #fdf6e3; margin: 0 12px; }
+      .page-hero h2 { font-size: 30px; }
+      .fees-wrap { padding: 50px 20px; }
+      .extra-costs { padding: 30px 22px; }
+      .footer-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 30px;
+        justify-content: center;
+      }
+      footer {
+        padding: 50px 28px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div style="display: flex; align-items: center; gap: 6px;">
+      <img src="images/logo.png" alt="Beth Barah Academy logo" style="height: 84px; width: auto;">
+      <h1>Beth Barah Academy</h1>
+      <span class="brand-slogan">The Citadel Of Learning</span>
+    </div>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav" id="siteNav">
+      <a href="index.html">Home</a>
+      <div class="nav-item">
+        <a href="#">About BBA</a>
+        <div class="dropdown">
+          <div class="dropdown-inner">
+            <a href="core-values.html"><span class="dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"></path></svg></span>Core Values</a>
+            <a href="mission.html"><span class="dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="5"></circle><circle cx="12" cy="12" r="1"></circle></svg></span>Our Mission</a>
+            <a href="vision.html"><span class="dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path><circle cx="12" cy="12" r="3"></circle></svg></span>Our Vision</a>
+            <a href="#"><span class="dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg></span>Principal's Welcome Message</a>
+            <a href="#"><span class="dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20l-5.447-2.724A1 1 0 0 1 3 16.382V5.618a1 1 0 0 1 1.447-.894L9 7m0 13 6-3m-6 3V7m6 10 5.447 2.724A1 1 0 0 0 21 18.83V8.062a1 1 0 0 0-.553-.894L15 4m0 13V4m0 0-6 3"></path></svg></span>The Journey</a>
+          </div>
+        </div>
+      </div>
+      <a href="#">Academics</a>
+      <div class="nav-item">
+        <a href="#">Admissions</a>
+        <div class="dropdown">
+          <div class="dropdown-inner">
+            <a href="admissions.html"><span class="dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></span>Admissions Process</a>
+            <a href="school-fees.html"><span class="dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></span>School Fees</a>
+          </div>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="#">School Life</a>
+        <div class="dropdown">
+          <div class="dropdown-inner">
+            <a href="gallery.html"><span class="dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><path d="M21 15l-5-5L5 21"></path></svg></span>Picture Gallery</a>
+          </div>
+        </div>
+      </div>
+      <a href="index.html#contact">Contact</a>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <h2>School Fees</h2>
+    <p>A breakdown of tuition and other costs by grade level at Beth Barah Academy.</p>
+  </section>
+
+  <div class="fees-wrap">
+    <p class="fees-intro">Fees are billed per term. Tap a category below to see the individual class fees. Figures shown are placeholders and will be updated with current amounts.</p>
+
+    <div class="fee-accordion">
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <div class="accordion-header-left">
+            <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg></span>
+            <div>
+              <h3>Creche &ndash; KG 2</h3>
+              <span>Early Childhood</span>
+            </div>
+          </div>
+          <span class="accordion-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <div class="class-row"><span class="class-name">Creche</span><span class="class-amount">[Amount]</span></div>
+            <div class="class-row"><span class="class-name">Nursery 1</span><span class="class-amount">[Amount]</span></div>
+            <div class="class-row"><span class="class-name">Nursery 2</span><span class="class-amount">[Amount]</span></div>
+            <div class="class-row"><span class="class-name">KG 1</span><span class="class-amount">[Amount]</span></div>
+            <div class="class-row"><span class="class-name">KG 2</span><span class="class-amount">[Amount]</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <div class="accordion-header-left">
+            <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></span>
+            <div>
+              <h3>Grade 1 &ndash; Grade 6</h3>
+              <span>Primary School</span>
+            </div>
+          </div>
+          <span class="accordion-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <div class="class-row"><span class="class-name">Grade 1</span><span class="class-amount">[Amount]</span></div>
+            <div class="class-row"><span class="class-name">Grade 2</span><span class="class-amount">[Amount]</span></div>
+            <div class="class-row"><span class="class-name">Grade 3</span><span class="class-amount">[Amount]</span></div>
+            <div class="class-row"><span class="class-name">Grade 4</span><span class="class-amount">[Amount]</span></div>
+            <div class="class-row"><span class="class-name">Grade 5</span><span class="class-amount">[Amount]</span></div>
+            <div class="class-row"><span class="class-name">Grade 6</span><span class="class-amount">[Amount]</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <div class="accordion-header-left">
+            <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"></path></svg></span>
+            <div>
+              <h3>Grade 7 &ndash; Grade 9</h3>
+              <span>Junior High School (JHS)</span>
+            </div>
+          </div>
+          <span class="accordion-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <div class="class-row"><span class="class-name">Grade 7 (JHS 1)</span><span class="class-amount">[Amount]</span></div>
+            <div class="class-row"><span class="class-name">Grade 8 (JHS 2)</span><span class="class-amount">[Amount]</span></div>
+            <div class="class-row"><span class="class-name">Grade 9 (JHS 3)</span><span class="class-amount">[Amount]</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="extra-costs">
+      <h3>Additional Costs</h3>
+      <p>One-time or recurring costs that may apply outside of tuition</p>
+      <div class="extra-grid">
+        <div class="extra-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path></svg></div>
+          <div><h4>Uniform</h4><span>[Amount]</span></div>
+        </div>
+        <div class="extra-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
+          <div><h4>Textbooks</h4><span>[Amount]</span></div>
+        </div>
+        <div class="extra-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+          <div><h4>PTA Dues</h4><span>[Amount]</span></div>
+        </div>
+        <div class="extra-item">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div>
+          <div><h4>Transportation</h4><span>[Amount] (optional)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <p class="fee-note">Fee amounts are subject to review. Please contact the school office for the most current fee schedule and available payment plans.</p>
+  </div>
+
+  <div class="cta-section">
+    <p>Have questions about fees or payment plans?</p>
+    <a href="index.html#contact" class="cta-btn">Contact the Office</a>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-col">
+        <h4>Beth Barah Academy</h4>
+        <p>The Citadel Of Learning</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <p>Gbawe, Gonsee-Agape Park (Accra)</p>
+        <p>bethbarahacademy@gmail.com</p>
+        <p>027-026-6615</p>
+      </div>
+    </div>
+    <p class="footer-bottom">&copy; 2026 Beth Barah Academy. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const siteNav = document.getElementById('siteNav');
+    hamburgerBtn.addEventListener('click', () => {
+      hamburgerBtn.classList.toggle('open');
+      siteNav.classList.toggle('open');
+    });
+    document.querySelectorAll('.nav-item > a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (window.innerWidth <= 900) {
+          e.preventDefault();
+          this.nextElementSibling.classList.toggle('open');
+        }
+      });
+    });
+  </script>
+  <script>
+    const siteHeader = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 30) {
+        siteHeader.classList.add('scrolled');
+      } else {
+        siteHeader.classList.remove('scrolled');
+      }
+    });
+  </script>
+  <script>
+    document.querySelectorAll('a[href]').forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && !href.startsWith('#') && !href.startsWith('http') && !href.startsWith('mailto')) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.body.classList.add('page-leaving');
+          setTimeout(() => { window.location.href = href; }, 300);
+        });
+      }
+    });
+  </script>
+  <script>
+    const revealEls = document.querySelectorAll('.accordion-item, .extra-costs');
+    revealEls.forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.1) + 's';
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
+  <script>
+    document.querySelectorAll('.accordion-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const item = header.closest('.accordion-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.accordion-item').forEach(el => el.classList.remove('open'));
+        if (!isOpen) {
+          item.classList.add('open');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
