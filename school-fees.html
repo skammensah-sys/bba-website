@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>School Fees - Beth Barah Academy</title>
+  <title>Fees Overview - Beth Barah Academy</title>
   <meta name="description" content="View Beth Barah Academy's school fees by grade level, including tuition and additional costs such as uniform, textbooks, and PTA dues.">
-  <meta property="og:title" content="School Fees - Beth Barah Academy">
+  <meta property="og:title" content="Fees Overview - Beth Barah Academy">
   <meta property="og:description" content="Fee breakdown by grade level for Beth Barah Academy.">
   <meta property="og:image" content="images/logo.png">
   <link rel="icon" type="image/png" href="images/logo.png">
@@ -216,46 +216,39 @@
       color: #333;
       font-weight: 600;
     }
-    .class-row .class-amount {
-      font-size: 15px;
-      font-weight: 700;
-      color: #14406e;
-      background-color: #fdf6e3;
-      padding: 5px 14px;
-      border-radius: 20px;
-    }
 
-    .extra-costs {
+    .included-section {
       background: white;
       border-radius: 14px;
       box-shadow: 0 8px 26px rgba(0,0,0,0.07);
       padding: 40px 40px;
+      margin-top: 20px;
       opacity: 0;
       transform: translateY(30px);
       transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     }
-    .extra-costs.visible {
+    .included-section.visible {
       opacity: 1;
       transform: translateY(0);
     }
-    .extra-costs h3 {
+    .included-section h3 {
       color: #14406e;
       font-size: 24px;
       margin-bottom: 6px;
       text-align: center;
     }
-    .extra-costs > p {
+    .included-section > p {
       text-align: center;
       color: #777;
       font-size: 14px;
       margin-bottom: 30px;
     }
-    .extra-grid {
+    .included-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 18px;
     }
-    .extra-item {
+    .included-item {
       display: flex;
       align-items: center;
       gap: 14px;
@@ -263,7 +256,7 @@
       border-radius: 10px;
       padding: 16px 18px;
     }
-    .extra-item .icon {
+    .included-item .icon {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -274,18 +267,21 @@
       background-color: #14406e;
       color: #ffcc00;
     }
-    .extra-item .icon svg {
+    .included-item .icon svg {
       width: 18px;
       height: 18px;
     }
-    .extra-item div h4 {
+    .included-item span {
       font-size: 14px;
-      color: #14406e;
-      margin-bottom: 2px;
+      color: #333;
+      font-weight: 600;
     }
-    .extra-item div span {
+    .included-note {
+      text-align: center;
+      color: #999;
       font-size: 13px;
-      color: #777;
+      font-style: italic;
+      margin-top: 24px;
     }
 
     .fee-note {
@@ -324,18 +320,21 @@
     }
 
     footer {
-      background-color: #1e5f8c;
-      background-image: linear-gradient(#1e5f8c, #1e5f8c), url('images/pattern.jpg');
-      background-blend-mode: multiply;
-      background-repeat: repeat;
-      color: #e8f1fa;
-      padding: 60px 40px 20px;
+      background-color: #0f2c4a;
+      color: #cdd6e0;
+      padding: 60px 60px 20px;
       margin-top: auto;
     }
-    .footer-content { display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; margin-bottom: 30px; }
-    .footer-col h4 { color: #ffcc00; margin-bottom: 15px; font-size: 16px; }
-    .footer-col p { font-size: 14px; color: #cdd6e0; margin-bottom: 6px; }
-    .footer-bottom { text-align: center; font-size: 13px; color: #9fb8ce; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px; }
+    .footer-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 40px; }
+    .footer-brand { display: flex; align-items: center; gap: 6px; max-width: 260px; }
+    .footer-brand img { height: 76px; width: auto; }
+    .footer-brand h4 { color: white; font-size: 16px; white-space: nowrap; }
+    .footer-brand span { font-size: 12px; color: #9fb8ce; }
+    .footer-cols { display: flex; gap: 70px; flex-wrap: wrap; }
+    .footer-col h5 { color: white; font-size: 14px; margin-bottom: 16px; }
+    .footer-col a, .footer-col p { display: block; color: #9fb8ce; text-decoration: none; font-size: 14px; margin-bottom: 10px; }
+    .footer-col a:hover { color: #ffcc00; }
+    .footer-bottom { text-align: center; font-size: 13px; color: #7c93a8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
 
     @media (max-width: 900px) {
       .hamburger { display: flex; }
@@ -355,16 +354,23 @@
       .dropdown-inner { box-shadow: none; border-radius: 0; background-color: #fdf6e3; margin: 0 12px; }
       .page-hero h2 { font-size: 30px; }
       .fees-wrap { padding: 50px 20px; }
-      .extra-costs { padding: 30px 22px; }
-      .footer-content {
+      .footer-top {
         flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 30px;
-        justify-content: center;
+        gap: 36px;
       }
       footer {
         padding: 50px 28px 24px;
+      }
+      .footer-cols {
+        flex-direction: column;
+        gap: 30px;
+        width: 100%;
+      }
+      .footer-col {
+        text-align: left;
+      }
+      .footer-brand {
+        max-width: 100%;
       }
     }
   </style>
@@ -400,7 +406,7 @@
         <div class="dropdown">
           <div class="dropdown-inner">
             <a href="admissions.html"><span class="dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></span>Admissions Process</a>
-            <a href="school-fees.html"><span class="dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></span>School Fees</a>
+            <a href="school-fees.html"><span class="dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></span>Fees Overview</a>
           </div>
         </div>
       </div>
@@ -417,12 +423,12 @@
   </header>
 
   <section class="page-hero">
-    <h2>School Fees</h2>
+    <h2>Fees Overview</h2>
     <p>A breakdown of tuition and other costs by grade level at Beth Barah Academy.</p>
   </section>
 
   <div class="fees-wrap">
-    <p class="fees-intro">Fees are billed per term. Tap a category below to see the individual class fees. Figures shown are placeholders and will be updated with current amounts.</p>
+    <p class="fees-intro">Fees are billed per term and vary by class. Tap a category below to see the classes it includes, and see what's covered in every fee below. For exact amounts and payment plans, please contact the school office.</p>
 
     <div class="fee-accordion">
       <div class="accordion-item">
@@ -438,11 +444,11 @@
         </div>
         <div class="accordion-body">
           <div class="accordion-body-inner">
-            <div class="class-row"><span class="class-name">Creche</span><span class="class-amount">[Amount]</span></div>
-            <div class="class-row"><span class="class-name">Nursery 1</span><span class="class-amount">[Amount]</span></div>
-            <div class="class-row"><span class="class-name">Nursery 2</span><span class="class-amount">[Amount]</span></div>
-            <div class="class-row"><span class="class-name">KG 1</span><span class="class-amount">[Amount]</span></div>
-            <div class="class-row"><span class="class-name">KG 2</span><span class="class-amount">[Amount]</span></div>
+            <div class="class-row"><span class="class-name">Creche</span></div>
+            <div class="class-row"><span class="class-name">Nursery 1</span></div>
+            <div class="class-row"><span class="class-name">Nursery 2</span></div>
+            <div class="class-row"><span class="class-name">KG 1</span></div>
+            <div class="class-row"><span class="class-name">KG 2</span></div>
           </div>
         </div>
       </div>
@@ -460,12 +466,12 @@
         </div>
         <div class="accordion-body">
           <div class="accordion-body-inner">
-            <div class="class-row"><span class="class-name">Grade 1</span><span class="class-amount">[Amount]</span></div>
-            <div class="class-row"><span class="class-name">Grade 2</span><span class="class-amount">[Amount]</span></div>
-            <div class="class-row"><span class="class-name">Grade 3</span><span class="class-amount">[Amount]</span></div>
-            <div class="class-row"><span class="class-name">Grade 4</span><span class="class-amount">[Amount]</span></div>
-            <div class="class-row"><span class="class-name">Grade 5</span><span class="class-amount">[Amount]</span></div>
-            <div class="class-row"><span class="class-name">Grade 6</span><span class="class-amount">[Amount]</span></div>
+            <div class="class-row"><span class="class-name">Grade 1</span></div>
+            <div class="class-row"><span class="class-name">Grade 2</span></div>
+            <div class="class-row"><span class="class-name">Grade 3</span></div>
+            <div class="class-row"><span class="class-name">Grade 4</span></div>
+            <div class="class-row"><span class="class-name">Grade 5</span></div>
+            <div class="class-row"><span class="class-name">Grade 6</span></div>
           </div>
         </div>
       </div>
@@ -483,38 +489,68 @@
         </div>
         <div class="accordion-body">
           <div class="accordion-body-inner">
-            <div class="class-row"><span class="class-name">Grade 7 (JHS 1)</span><span class="class-amount">[Amount]</span></div>
-            <div class="class-row"><span class="class-name">Grade 8 (JHS 2)</span><span class="class-amount">[Amount]</span></div>
-            <div class="class-row"><span class="class-name">Grade 9 (JHS 3)</span><span class="class-amount">[Amount]</span></div>
+            <div class="class-row"><span class="class-name">Grade 7 (JHS 1)</span></div>
+            <div class="class-row"><span class="class-name">Grade 8 (JHS 2)</span></div>
+            <div class="class-row"><span class="class-name">Grade 9 (JHS 3)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <div class="accordion-header-left">
+            <span class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"></path><path d="M2 8h18a2 2 0 0 1 2 2v10"></path><path d="M2 17h20"></path><path d="M6 8v9"></path></svg></span>
+            <div>
+              <h3>Boarding</h3>
+              <span>Optional, in addition to tuition</span>
+            </div>
+          </div>
+          <span class="accordion-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+        </div>
+        <div class="accordion-body">
+          <div class="accordion-body-inner">
+            <div class="class-row"><span class="class-name">Lodging</span></div>
+            <div class="class-row"><span class="class-name">Utilities</span></div>
+            <div class="class-row"><span class="class-name">House Attire</span></div>
+            <div class="class-row"><span class="class-name">Feeding (Preschool, Primary, Junior High rates apply)</span></div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="extra-costs">
-      <h3>Additional Costs</h3>
-      <p>One-time or recurring costs that may apply outside of tuition</p>
-      <div class="extra-grid">
-        <div class="extra-item">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path></svg></div>
-          <div><h4>Uniform</h4><span>[Amount]</span></div>
+    <div class="included-section">
+      <h3>What Your Fees Cover</h3>
+      <p>Every class fee (Creche through JHS) is made up of the following</p>
+      <div class="included-grid">
+        <div class="included-item">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></span>
+          <span>Admission Fee</span>
         </div>
-        <div class="extra-item">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></div>
-          <div><h4>Textbooks</h4><span>[Amount]</span></div>
+        <div class="included-item">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg></span>
+          <span>Tuition (School Fees)</span>
         </div>
-        <div class="extra-item">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
-          <div><h4>PTA Dues</h4><span>[Amount]</span></div>
+        <div class="included-item">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg></span>
+          <span>Stationery</span>
         </div>
-        <div class="extra-item">
-          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg></div>
-          <div><h4>Transportation</h4><span>[Amount] (optional)</span></div>
+        <div class="included-item">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"></path></svg></span>
+          <span>School Uniforms</span>
+        </div>
+        <div class="included-item">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg></span>
+          <span>Toiletries</span>
+        </div>
+        <div class="included-item">
+          <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg></span>
+          <span>Feeding (billed per day)</span>
         </div>
       </div>
+      <p class="included-note">Boarding students have separate charges for lodging, utilities, and house attire.</p>
     </div>
 
-    <p class="fee-note">Fee amounts are subject to review. Please contact the school office for the most current fee schedule and available payment plans.</p>
+    <p class="fee-note">For detailed fee amounts, payment plans, or any questions about tuition and other costs, please contact the school office directly.</p>
   </div>
 
   <div class="cta-section">
@@ -523,16 +559,21 @@
   </div>
 
   <footer>
-    <div class="footer-content">
-      <div class="footer-col">
-        <h4>Beth Barah Academy</h4>
-        <p>The Citadel Of Learning</p>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Beth Barah Academy logo">
+        <div>
+          <h4>BETH BARAH ACADEMY</h4>
+          <span>The Citadel of Learning</span>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <p>Gbawe, Gonsee-Agape Park (Accra)</p>
-        <p>bethbarahacademy@gmail.com</p>
-        <p>027-026-6615</p>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <p>Gbawe, Gonsee-Agape Park (Accra)</p>
+          <p>027-026-6615</p>
+          <p>bethbarahacademy@gmail.com</p>
+        </div>
       </div>
     </div>
     <p class="footer-bottom">&copy; 2026 Beth Barah Academy. All rights reserved.</p>
@@ -577,7 +618,7 @@
     });
   </script>
   <script>
-    const revealEls = document.querySelectorAll('.accordion-item, .extra-costs');
+    const revealEls = document.querySelectorAll('.accordion-item, .included-section');
     revealEls.forEach((el, i) => {
       el.style.transitionDelay = (i * 0.1) + 's';
     });

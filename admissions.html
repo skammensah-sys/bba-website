@@ -222,18 +222,21 @@
     }
 
     footer {
-      background-color: #1e5f8c;
-      background-image: linear-gradient(#1e5f8c, #1e5f8c), url('images/pattern.jpg');
-      background-blend-mode: multiply;
-      background-repeat: repeat;
-      color: #e8f1fa;
-      padding: 60px 40px 20px;
+      background-color: #0f2c4a;
+      color: #cdd6e0;
+      padding: 60px 60px 20px;
       margin-top: auto;
     }
-    .footer-content { display: flex; justify-content: center; gap: 80px; flex-wrap: wrap; margin-bottom: 30px; }
-    .footer-col h4 { color: #ffcc00; margin-bottom: 15px; font-size: 16px; }
-    .footer-col p { font-size: 14px; color: #cdd6e0; margin-bottom: 6px; }
-    .footer-bottom { text-align: center; font-size: 13px; color: #9fb8ce; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px; }
+    .footer-top { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 40px; }
+    .footer-brand { display: flex; align-items: center; gap: 6px; max-width: 260px; }
+    .footer-brand img { height: 76px; width: auto; }
+    .footer-brand h4 { color: white; font-size: 16px; white-space: nowrap; }
+    .footer-brand span { font-size: 12px; color: #9fb8ce; }
+    .footer-cols { display: flex; gap: 70px; flex-wrap: wrap; }
+    .footer-col h5 { color: white; font-size: 14px; margin-bottom: 16px; }
+    .footer-col a, .footer-col p { display: block; color: #9fb8ce; text-decoration: none; font-size: 14px; margin-bottom: 10px; }
+    .footer-col a:hover { color: #ffcc00; }
+    .footer-bottom { text-align: center; font-size: 13px; color: #7c93a8; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
 
     @media (max-width: 900px) {
       .hamburger { display: flex; }
@@ -257,15 +260,23 @@
       .step { gap: 18px; }
       .step-number { width: 70px; height: 70px; font-size: 26px; }
       .step-content { padding: 22px 20px; }
-      .footer-content {
+      .footer-top {
         flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 30px;
-        justify-content: center;
+        gap: 36px;
       }
       footer {
         padding: 50px 28px 24px;
+      }
+      .footer-cols {
+        flex-direction: column;
+        gap: 30px;
+        width: 100%;
+      }
+      .footer-col {
+        text-align: left;
+      }
+      .footer-brand {
+        max-width: 100%;
       }
     }
   </style>
@@ -301,7 +312,7 @@
         <div class="dropdown">
           <div class="dropdown-inner">
             <a href="admissions.html"><span class="dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg></span>Admissions Process</a>
-            <a href="school-fees.html"><span class="dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></span>School Fees</a>
+            <a href="school-fees.html"><span class="dd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg></span>Fees Overview</a>
           </div>
         </div>
       </div>
@@ -365,16 +376,21 @@
   </div>
 
   <footer>
-    <div class="footer-content">
-      <div class="footer-col">
-        <h4>Beth Barah Academy</h4>
-        <p>The Citadel Of Learning</p>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Beth Barah Academy logo">
+        <div>
+          <h4>BETH BARAH ACADEMY</h4>
+          <span>The Citadel of Learning</span>
+        </div>
       </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <p>Gbawe, Gonsee-Agape Park (Accra)</p>
-        <p>bethbarahacademy@gmail.com</p>
-        <p>027-026-6615</p>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h5>Connect</h5>
+          <p>Gbawe, Gonsee-Agape Park (Accra)</p>
+          <p>027-026-6615</p>
+          <p>bethbarahacademy@gmail.com</p>
+        </div>
       </div>
     </div>
     <p class="footer-bottom">&copy; 2026 Beth Barah Academy. All rights reserved.</p>
